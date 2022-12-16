@@ -9,14 +9,14 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 
-@AllArgsConstructor
-@NoArgsConstructor
-@Data
-@Entity
-public class Warehouse {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private String title;
-    private Address address;
-}
+//@AllArgsConstructor
+//@NoArgsConstructor
+//@Data
+//@Entity
+//public class Warehouse {
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    private Long id;
+//    private String title;
+//    private Address address;
+//}

@@ -8,18 +8,18 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-
-@AllArgsConstructor
-@NoArgsConstructor
-@Data
-@Entity
-public class Delivery {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private Warehouse warehouseFrom;
-    private Warehouse warehouseTo;
-    private Transporter transporter;
-    private Cargo cargo;
-    private StatusOfDelivery statusOfDelivery;
-}
+//
+//@AllArgsConstructor
+//@NoArgsConstructor
+//@Data
+//@Entity
+//public class Delivery {
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    private Long id;
+//    private Warehouse warehouseFrom;
+//    private Warehouse warehouseTo;
+//    private Transporter transporter;
+//    private Cargo cargo;
+//    private StatusOfDelivery statusOfDelivery;
+//}
