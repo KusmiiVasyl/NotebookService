@@ -1,12 +1,11 @@
 package com.delivery.notebookservice.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 
 @AllArgsConstructor
@@ -21,4 +20,9 @@ public class Address {
     private String street;
     private double longitude;
     private double latitude;
+
+    @OneToMany (mappedBy = "address")
+    private List<Warehouse> warehouses;
+//    @OneToOne(mappedBy = "addressId")
+//    private Warehouse warehouses;
 }
