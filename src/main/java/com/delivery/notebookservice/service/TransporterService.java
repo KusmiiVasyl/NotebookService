@@ -15,7 +15,7 @@ import java.util.List;
 public class TransporterService {
     private final TransporterRepository transporterRepository;
 
-    public List<Transporter> getAl() {
+    public List<Transporter> getAll() {
         return transporterRepository.findAll();
     }
 }

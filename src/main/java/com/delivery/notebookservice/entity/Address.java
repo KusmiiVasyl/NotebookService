@@ -1,5 +1,9 @@
 package com.delivery.notebookservice.entity;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerator;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -21,8 +25,8 @@ public class Address {
     private double longitude;
     private double latitude;
 
-    @OneToMany (mappedBy = "address")
+    @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+    @JsonIdentityReference(alwaysAsId = true)
+    @OneToMany(mappedBy = "address")
     private List<Warehouse> warehouses;
-//    @OneToOne(mappedBy = "addressId")
-//    private Warehouse warehouses;
 }

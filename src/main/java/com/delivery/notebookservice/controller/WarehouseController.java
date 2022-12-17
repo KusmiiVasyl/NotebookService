@@ -1,7 +1,7 @@
 package com.delivery.notebookservice.controller;
 
-import com.delivery.notebookservice.entity.Cargo;
-import com.delivery.notebookservice.service.CargoService;
+import com.delivery.notebookservice.entity.Warehouse;
+import com.delivery.notebookservice.service.WarehouseService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,13 +12,13 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("api/notebookservice/cargo")
-public class CargoController {
-    private final CargoService cargoService;
+@RequestMapping("api/notebookservice/warehouses")
+public class WarehouseController {
+    private final WarehouseService warehouseService;
 
     @GetMapping()
-    public List<Cargo> getAll() {
-        return cargoService.getAll();
+    public List<Warehouse> getAll() {
+        return warehouseService.getAll();
     }
 
 }

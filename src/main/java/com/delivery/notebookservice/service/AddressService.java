@@ -13,7 +13,7 @@ import java.util.List;
 public class AddressService {
     private final AddressRepository addressRepository;
 
-    public List<Address> getAl() {
+    public List<Address> getAll() {
         return addressRepository.findAll();
     }
 }

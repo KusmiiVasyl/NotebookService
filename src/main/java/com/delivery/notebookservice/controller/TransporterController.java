@@ -18,7 +18,7 @@ public class TransporterController {
 
     @GetMapping()
     public List<Transporter> getAll() {
-        return transporterService.getAl();
+        return transporterService.getAll();
     }
 
 }

@@ -39,4 +39,16 @@ INSERT INTO warehouse (title, address_id) VALUES
 ('Storage №9', 6),
 ('Storage №10', 6);
 
+INSERT INTO delivery (warehouse_from_id, warehouse_to_id, transporter_id, cargo_id, status_of_delivery) VALUES
+(1, 5, 3, 8, 1),
+(5, 6, 2, 6, 3),
+(3, 1, 1, 4, 5),
+(2, 4, 6, 7, 2),
+(10, 3, 9, 2, 7),
+(9, 6, 4, 1, 6),
+(7, 8, 8, 3, 5),
+(8, 2, 7, 8, 1),
+(4, 10, 6, 4, 3),
+(2, 5, 2, 3, 2);
+
 

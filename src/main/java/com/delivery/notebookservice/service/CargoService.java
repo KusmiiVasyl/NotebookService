@@ -15,7 +15,7 @@ import java.util.List;
 public class CargoService {
     private final CargoRepository cargoRepository;
 
-    public List<Cargo> getAl() {
+    public List<Cargo> getAll() {
         return cargoRepository.findAll();
     }
 }
