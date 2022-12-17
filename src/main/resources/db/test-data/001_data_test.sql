@@ -44,7 +44,7 @@ INSERT INTO delivery (warehouse_from_id, warehouse_to_id, transporter_id, cargo_
 (5, 6, 2, 6, 3),
 (3, 1, 1, 4, 5),
 (2, 4, 6, 7, 2),
-(10, 3, 9, 2, 7),
+(10, 3, 9, 2, 0),
 (9, 6, 4, 1, 6),
 (7, 8, 8, 3, 5),
 (8, 2, 7, 8, 1),
