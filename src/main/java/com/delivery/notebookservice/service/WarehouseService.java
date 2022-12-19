@@ -26,7 +26,8 @@ public class WarehouseService {
 
     public void update(Long id, Warehouse warehouse) {
         Warehouse existingWarehouse = get(id);
-        existingWarehouse = warehouse.clone();
+        existingWarehouse.setTitle(warehouse.getTitle());
+        existingWarehouse.setAddress(warehouse.getAddress());
         warehouseRepository.save(existingWarehouse);
     }
 

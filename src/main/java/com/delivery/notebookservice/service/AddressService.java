@@ -5,6 +5,7 @@ import com.delivery.notebookservice.repository.AddressRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -27,7 +28,10 @@ public class AddressService {
 
     public void update(Long id, Address address) {
         Address existingAddress = get(id);
-        existingAddress = address.clone();
+        existingAddress.setCity(address.getCity());
+        existingAddress.setStreet(address.getStreet());
+        existingAddress.setLongitude(address.getLongitude());
+        existingAddress.setLatitude(address.getLatitude());
         addressRepository.save(existingAddress);
     }
 

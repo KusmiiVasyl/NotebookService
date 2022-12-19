@@ -29,7 +29,9 @@ public class TransporterService {
 
     public void update(Long id, Transporter transporter) {
         Transporter existingTransporter = get(id);
-        existingTransporter = transporter.clone();
+        existingTransporter.setName(transporter.getName());
+        existingTransporter.setCarModel(transporter.getCarModel());
+        existingTransporter.setLoadCapacity(transporter.getLoadCapacity());
         transporterRepository.save(existingTransporter);
     }
 

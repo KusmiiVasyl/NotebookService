@@ -15,7 +15,7 @@ import java.util.List;
 @NoArgsConstructor
 @Data
 @Entity
-public class Address implements Cloneable{
+public class Address {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -28,13 +28,4 @@ public class Address implements Cloneable{
     @JsonIdentityReference(alwaysAsId = true)
     @OneToMany(mappedBy = "address", orphanRemoval = true)
     private List<Warehouse> warehouses;
-
-    @Override
-    public Address clone() {
-        try {
-            return (Address) super.clone();
-        } catch (CloneNotSupportedException e) {
-            throw new AssertionError();
-        }
-    }
 }

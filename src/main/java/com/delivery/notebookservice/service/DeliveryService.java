@@ -26,7 +26,11 @@ public class DeliveryService {
 
     public void update(Long id, Delivery delivery) {
         Delivery existingDelivery = get(id);
-        existingDelivery = delivery.clone();
+        existingDelivery.setWarehouseFrom(delivery.getWarehouseFrom());
+        existingDelivery.setWarehouseTo(delivery.getWarehouseTo());
+        existingDelivery.setTransporter(delivery.getTransporter());
+        existingDelivery.setCargo(delivery.getCargo());
+        existingDelivery.setStatusOfDelivery(delivery.getStatusOfDelivery());
         deliveryRepository.save(existingDelivery);
     }
 

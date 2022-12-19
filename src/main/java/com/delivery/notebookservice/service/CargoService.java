@@ -29,7 +29,8 @@ public class CargoService {
 
     public void update(Long id, Cargo cargo) {
         Cargo existingCargo = get(id);
-        existingCargo = cargo.clone();
+        existingCargo.setName(cargo.getName());
+        existingCargo.setAmount(cargo.getAmount());
         cargoRepository.save(existingCargo);
     }
 

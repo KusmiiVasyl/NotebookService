@@ -15,7 +15,7 @@ import java.util.List;
 @NoArgsConstructor
 @Data
 @Entity
-public class Warehouse implements Cloneable{
+public class Warehouse {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -36,14 +36,4 @@ public class Warehouse implements Cloneable{
     @JsonIdentityReference(alwaysAsId = true)
     @OneToMany(mappedBy = "warehouseTo")
     private List<Delivery> deliveriesTo;
-
-
-    @Override
-    public Warehouse clone() {
-        try {
-            return (Warehouse) super.clone();
-        } catch (CloneNotSupportedException e) {
-            throw new AssertionError();
-        }
-    }
 }
