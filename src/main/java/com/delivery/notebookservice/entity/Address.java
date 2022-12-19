@@ -2,7 +2,6 @@ package com.delivery.notebookservice.entity;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIdentityReference;
-import com.fasterxml.jackson.annotation.ObjectIdGenerator;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -16,7 +15,7 @@ import java.util.List;
 @NoArgsConstructor
 @Data
 @Entity
-public class Address {
+public class Address implements Cloneable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -27,6 +26,15 @@ public class Address {
 
     @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
     @JsonIdentityReference(alwaysAsId = true)
-    @OneToMany(mappedBy = "address")
+    @OneToMany(mappedBy = "address", orphanRemoval = true)
     private List<Warehouse> warehouses;
+
+    @Override
+    public Address clone() {
+        try {
+            return (Address) super.clone();
+        } catch (CloneNotSupportedException e) {
+            throw new AssertionError();
+        }
+    }
 }

@@ -15,4 +15,23 @@ public class WarehouseService {
     public List<Warehouse> getAll() {
         return warehouseRepository.findAll();
     }
+
+    public Warehouse get(Long id) {
+        return warehouseRepository.findById(id).orElse(new Warehouse());
+    }
+
+    public void create(Warehouse warehouse) {
+        warehouseRepository.save(warehouse);
+    }
+
+    public void update(Long id, Warehouse warehouse) {
+        Warehouse existingWarehouse = get(id);
+        existingWarehouse = warehouse.clone();
+        warehouseRepository.save(existingWarehouse);
+    }
+
+
+    public void delete(Long id) {
+        warehouseRepository.deleteById(id);
+    }
 }

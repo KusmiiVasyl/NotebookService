@@ -16,4 +16,22 @@ public class AddressService {
     public List<Address> getAll() {
         return addressRepository.findAll();
     }
+
+    public Address get(Long id) {
+        return addressRepository.findById(id).orElse(new Address());
+    }
+
+    public void create(Address address) {
+        addressRepository.save(address);
+    }
+
+    public void update(Long id, Address address) {
+        Address existingAddress = get(id);
+        existingAddress = address.clone();
+        addressRepository.save(existingAddress);
+    }
+
+    public void delete(Long id) {
+        addressRepository.deleteById(id);
+    }
 }
