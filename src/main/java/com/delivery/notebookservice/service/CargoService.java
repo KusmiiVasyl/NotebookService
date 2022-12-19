@@ -18,4 +18,22 @@ public class CargoService {
     public List<Cargo> getAll() {
         return cargoRepository.findAll();
     }
+
+    public Cargo get(Long id) {
+        return cargoRepository.findById(id).orElse(new Cargo());
+    }
+
+    public void create(Cargo cargo) {
+        cargoRepository.save(cargo);
+    }
+
+    public void update(Long id, Cargo cargo) {
+        Cargo existingCargo = get(id);
+        existingCargo = cargo.clone();
+        cargoRepository.save(existingCargo);
+    }
+
+    public void delete(Long id) {
+        cargoRepository.deleteById(id);
+    }
 }
