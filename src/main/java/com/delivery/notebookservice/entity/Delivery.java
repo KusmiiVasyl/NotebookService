@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 @Entity
-public class Delivery {
+public class Delivery implements Cloneable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -32,4 +32,13 @@ public class Delivery {
     private Cargo cargo;
 
     private StatusOfDelivery statusOfDelivery;
+
+    @Override
+    public Delivery clone() {
+        try {
+            return (Delivery) super.clone();
+        } catch (CloneNotSupportedException e) {
+            throw new AssertionError();
+        }
+    }
 }
