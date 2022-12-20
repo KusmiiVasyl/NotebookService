@@ -2,6 +2,7 @@ package com.delivery.notebookservice.service;
 
 import com.delivery.notebookservice.entity.Cargo;
 import com.delivery.notebookservice.entity.Transporter;
+import com.delivery.notebookservice.exception.EntityNotFoundException;
 import com.delivery.notebookservice.repository.CargoRepository;
 import com.delivery.notebookservice.repository.TransporterRepository;
 import lombok.RequiredArgsConstructor;
@@ -20,7 +21,7 @@ public class TransporterService {
     }
 
     public Transporter get(Long id) {
-        return transporterRepository.findById(id).orElse(new Transporter());
+        return transporterRepository.findById(id).orElseThrow(EntityNotFoundException::new);
     }
 
     public void create(Transporter transporter) {

@@ -1,6 +1,7 @@
 package com.delivery.notebookservice.service;
 
 import com.delivery.notebookservice.entity.Address;
+import com.delivery.notebookservice.exception.EntityNotFoundException;
 import com.delivery.notebookservice.repository.AddressRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -19,7 +20,7 @@ public class AddressService {
     }
 
     public Address get(Long id) {
-        return addressRepository.findById(id).orElse(new Address());
+        return addressRepository.findById(id).orElseThrow(EntityNotFoundException::new);
     }
 
     public void create(Address address) {

@@ -1,6 +1,7 @@
 package com.delivery.notebookservice.service;
 
 import com.delivery.notebookservice.entity.Warehouse;
+import com.delivery.notebookservice.exception.EntityNotFoundException;
 import com.delivery.notebookservice.repository.WarehouseRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -17,7 +18,7 @@ public class WarehouseService {
     }
 
     public Warehouse get(Long id) {
-        return warehouseRepository.findById(id).orElse(new Warehouse());
+        return warehouseRepository.findById(id).orElseThrow(EntityNotFoundException::new);
     }
 
     public void create(Warehouse warehouse) {
