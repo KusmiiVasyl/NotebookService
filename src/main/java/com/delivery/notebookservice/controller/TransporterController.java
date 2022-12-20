@@ -1,6 +1,5 @@
 package com.delivery.notebookservice.controller;
 
-import com.delivery.notebookservice.entity.Address;
 import com.delivery.notebookservice.entity.Transporter;
 import com.delivery.notebookservice.service.TransporterService;
 import lombok.RequiredArgsConstructor;

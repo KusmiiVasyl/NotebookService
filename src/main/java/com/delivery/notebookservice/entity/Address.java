@@ -26,6 +26,6 @@ public class Address {
 
     @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
     @JsonIdentityReference(alwaysAsId = true)
-    @OneToMany(mappedBy = "address", orphanRemoval = true)
+    @OneToMany(mappedBy = "address")
     private List<Warehouse> warehouses;
 }

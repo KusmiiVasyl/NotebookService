@@ -5,8 +5,6 @@ import com.delivery.notebookservice.exception.EntityNotFoundException;
 import com.delivery.notebookservice.repository.AddressRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
 import java.util.List;
 
 

@@ -1,7 +1,6 @@
 package com.delivery.notebookservice.controller;
 
 import com.delivery.notebookservice.entity.Cargo;
-import com.delivery.notebookservice.entity.Transporter;
 import com.delivery.notebookservice.service.CargoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;

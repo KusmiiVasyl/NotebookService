@@ -1,6 +1,5 @@
 package com.delivery.notebookservice.repository;
 
-import com.delivery.notebookservice.entity.Transporter;
 import com.delivery.notebookservice.entity.Warehouse;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

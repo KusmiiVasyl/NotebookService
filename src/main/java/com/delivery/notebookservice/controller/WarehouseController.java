@@ -1,6 +1,5 @@
 package com.delivery.notebookservice.controller;
 
-import com.delivery.notebookservice.entity.Address;
 import com.delivery.notebookservice.entity.Warehouse;
 import com.delivery.notebookservice.service.WarehouseService;
 import lombok.RequiredArgsConstructor;
@@ -39,5 +38,4 @@ public class WarehouseController {
     private void delete(@PathVariable Long id) {
         warehouseService.delete(id);
     }
-
 }

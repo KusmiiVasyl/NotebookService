@@ -32,7 +32,6 @@ public class WarehouseService {
         warehouseRepository.save(existingWarehouse);
     }
 
-
     public void delete(Long id) {
         warehouseRepository.deleteById(id);
     }
