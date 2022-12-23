@@ -1,5 +1,6 @@
 package com.delivery.notebookservice.controller;
 
+import com.delivery.notebookservice.dto.WarehouseCreateDto;
 import com.delivery.notebookservice.dto.WarehouseDto;
 import com.delivery.notebookservice.entity.Warehouse;
 import com.delivery.notebookservice.service.WarehouseService;
@@ -26,13 +27,13 @@ public class WarehouseController {
     }
 
     @PostMapping()
-    private void create(@RequestBody WarehouseDto warehouseDto) {
-        warehouseService.create(warehouseDto);
+    private void create(@RequestBody WarehouseCreateDto warehouseCreateDto) {
+        warehouseService.create(warehouseCreateDto);
     }
 
     @PutMapping("/{id}")
-    private void update(@PathVariable Long id, @RequestBody WarehouseDto warehouseDto) {
-        warehouseService.update(id, warehouseDto);
+    private void update(@PathVariable Long id, @RequestBody WarehouseCreateDto warehouseCreateDto) {
+        warehouseService.update(id, warehouseCreateDto);
     }
 
     @DeleteMapping("/{id}")

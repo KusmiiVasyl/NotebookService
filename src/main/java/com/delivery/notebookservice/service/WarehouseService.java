@@ -1,10 +1,12 @@
 package com.delivery.notebookservice.service;
 
+import com.delivery.notebookservice.dto.WarehouseCreateDto;
 import com.delivery.notebookservice.dto.WarehouseDto;
 import com.delivery.notebookservice.entity.Address;
 import com.delivery.notebookservice.entity.Warehouse;
 import com.delivery.notebookservice.exception.EntityNotFoundException;
 import com.delivery.notebookservice.mapper.Mapper;
+import com.delivery.notebookservice.repository.AddressRepository;
 import com.delivery.notebookservice.repository.WarehouseRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -16,6 +18,7 @@ import java.util.List;
 @Service
 public class WarehouseService {
     private final WarehouseRepository warehouseRepository;
+    private final AddressRepository addressRepository;
     private final Mapper mapper;
 
     public List<WarehouseDto> getAll() {
@@ -26,13 +29,21 @@ public class WarehouseService {
         return warehouseRepository.findById(id).map(mapper::toWarehouseDto).orElseThrow(EntityNotFoundException::new);
     }
 
-    public void create(WarehouseDto warehouseDto) {
-        warehouseRepository.save(mapper.toWarehouse(warehouseDto));
+    public void create(WarehouseCreateDto warehouseCreateDto) {
+        Address address = addressRepository.findById(warehouseCreateDto.getAddressId())
+                .orElseThrow(EntityNotFoundException::new);
+        Warehouse warehouse = new Warehouse();
+        warehouse.setTitle(warehouseCreateDto.getTitle());
+        warehouse.setAddress(address);
+        warehouseRepository.save(warehouse);
     }
 
-    public void update(Long id, WarehouseDto warehouseDto) {
+    public void update(Long id, WarehouseCreateDto warehouseCreateDto) {
         Warehouse warehouse = warehouseRepository.findById(id).orElseThrow(EntityNotFoundException::new);
-        mapper.mergeWarehouse(warehouseDto, warehouse);
+        Address address = addressRepository.findById(warehouseCreateDto.getAddressId())
+                .orElseThrow(EntityNotFoundException::new);
+        warehouse.setAddress(address);
+        warehouse.setTitle(warehouseCreateDto.getTitle());
         warehouseRepository.save(warehouse);
     }
 

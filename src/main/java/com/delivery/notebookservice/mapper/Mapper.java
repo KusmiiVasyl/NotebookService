@@ -2,6 +2,7 @@ package com.delivery.notebookservice.mapper;
 
 import com.delivery.notebookservice.dto.*;
 import com.delivery.notebookservice.entity.*;
+import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
 
@@ -17,7 +18,9 @@ public interface Mapper {
     @Mapping(source = "warehouse.address.longitude", target = "longitude")
     @Mapping(source = "warehouse.address.latitude", target = "latitude")
     WarehouseDto toWarehouseDto(Warehouse warehouse);
+    @InheritInverseConfiguration
     Warehouse toWarehouse(WarehouseDto warehouseDto);
+    @InheritInverseConfiguration
     void mergeWarehouse(WarehouseDto warehouseDto, @MappingTarget Warehouse warehouse);
 
     TransporterDto toTransporterDto(Transporter transporter);
