@@ -1,5 +1,6 @@
 package com.delivery.notebookservice.controller;
 
+import com.delivery.notebookservice.dto.WarehouseDto;
 import com.delivery.notebookservice.entity.Warehouse;
 import com.delivery.notebookservice.service.WarehouseService;
 import lombok.RequiredArgsConstructor;
@@ -15,23 +16,23 @@ public class WarehouseController {
     private final WarehouseService warehouseService;
 
     @GetMapping()
-    public List<Warehouse> getAll() {
+    public List<WarehouseDto> getAll() {
         return warehouseService.getAll();
     }
 
     @GetMapping("/{id}")
-    public Warehouse get(@PathVariable Long id) {
+    public WarehouseDto get(@PathVariable Long id) {
         return warehouseService.get(id);
     }
 
     @PostMapping()
-    private void create(@RequestBody Warehouse warehouse) {
-        warehouseService.create(warehouse);
+    private void create(@RequestBody WarehouseDto warehouseDto) {
+        warehouseService.create(warehouseDto);
     }
 
     @PutMapping("/{id}")
-    private void update(@PathVariable Long id, @RequestBody Warehouse warehouse) {
-        warehouseService.update(id, warehouse);
+    private void update(@PathVariable Long id, @RequestBody WarehouseDto warehouseDto) {
+        warehouseService.update(id, warehouseDto);
     }
 
     @DeleteMapping("/{id}")

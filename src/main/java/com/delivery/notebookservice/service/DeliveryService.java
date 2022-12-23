@@ -1,7 +1,9 @@
 package com.delivery.notebookservice.service;
 
+import com.delivery.notebookservice.dto.DeliveryDto;
 import com.delivery.notebookservice.entity.Delivery;
 import com.delivery.notebookservice.exception.EntityNotFoundException;
+import com.delivery.notebookservice.mapper.Mapper;
 import com.delivery.notebookservice.repository.DeliveryRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -12,27 +14,24 @@ import java.util.List;
 @Service
 public class DeliveryService {
     private final DeliveryRepository deliveryRepository;
+    private final Mapper mapper;
 
-    public List<Delivery> getAll() {
-        return deliveryRepository.findAll();
+    public List<DeliveryDto> getAll() {
+        return deliveryRepository.findAll().stream().map(mapper::toDeliveryDto).toList();
     }
 
-    public Delivery get(Long id) {
-        return deliveryRepository.findById(id).orElseThrow(EntityNotFoundException::new);
+    public DeliveryDto get(Long id) {
+        return deliveryRepository.findById(id).map(mapper::toDeliveryDto).orElseThrow(EntityNotFoundException::new);
     }
 
-    public void create(Delivery delivery) {
+    public void create(DeliveryDto deliveryDto) {
+        deliveryRepository.save(mapper.toDelivery(deliveryDto));
+    }
+
+    public void update(Long id, DeliveryDto deliveryDto) {
+        Delivery delivery = deliveryRepository.findById(id).orElseThrow(EntityNotFoundException::new);
+        mapper.mergeDelivery(deliveryDto, delivery);
         deliveryRepository.save(delivery);
-    }
-
-    public void update(Long id, Delivery delivery) {
-        Delivery existingDelivery = get(id);
-        existingDelivery.setWarehouseFrom(delivery.getWarehouseFrom());
-        existingDelivery.setWarehouseTo(delivery.getWarehouseTo());
-        existingDelivery.setTransporter(delivery.getTransporter());
-        existingDelivery.setCargo(delivery.getCargo());
-        existingDelivery.setStatusOfDelivery(delivery.getStatusOfDelivery());
-        deliveryRepository.save(existingDelivery);
     }
 
     public void delete(Long id) {
