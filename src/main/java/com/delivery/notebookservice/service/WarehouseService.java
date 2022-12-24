@@ -1,6 +1,6 @@
 package com.delivery.notebookservice.service;
 
-import com.delivery.notebookservice.dto.WarehouseCreateDto;
+import com.delivery.notebookservice.dto.WarehouseAddressDto;
 import com.delivery.notebookservice.dto.WarehouseDto;
 import com.delivery.notebookservice.entity.Address;
 import com.delivery.notebookservice.entity.Warehouse;
@@ -29,21 +29,21 @@ public class WarehouseService {
         return warehouseRepository.findById(id).map(mapper::toWarehouseDto).orElseThrow(EntityNotFoundException::new);
     }
 
-    public void create(WarehouseCreateDto warehouseCreateDto) {
-        Address address = addressRepository.findById(warehouseCreateDto.getAddressId())
+    public void create(WarehouseAddressDto warehouseAddressDto) {
+        Address address = addressRepository.findById(warehouseAddressDto.getAddressId())
                 .orElseThrow(EntityNotFoundException::new);
         Warehouse warehouse = new Warehouse();
-        warehouse.setTitle(warehouseCreateDto.getTitle());
+        warehouse.setTitle(warehouseAddressDto.getTitle());
         warehouse.setAddress(address);
         warehouseRepository.save(warehouse);
     }
 
-    public void update(Long id, WarehouseCreateDto warehouseCreateDto) {
+    public void update(Long id, WarehouseAddressDto warehouseAddressDto) {
         Warehouse warehouse = warehouseRepository.findById(id).orElseThrow(EntityNotFoundException::new);
-        Address address = addressRepository.findById(warehouseCreateDto.getAddressId())
+        Address address = addressRepository.findById(warehouseAddressDto.getAddressId())
                 .orElseThrow(EntityNotFoundException::new);
         warehouse.setAddress(address);
-        warehouse.setTitle(warehouseCreateDto.getTitle());
+        warehouse.setTitle(warehouseAddressDto.getTitle());
         warehouseRepository.save(warehouse);
     }
 

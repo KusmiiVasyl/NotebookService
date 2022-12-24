@@ -1,8 +1,7 @@
 package com.delivery.notebookservice.controller;
 
-import com.delivery.notebookservice.dto.WarehouseCreateDto;
+import com.delivery.notebookservice.dto.WarehouseAddressDto;
 import com.delivery.notebookservice.dto.WarehouseDto;
-import com.delivery.notebookservice.entity.Warehouse;
 import com.delivery.notebookservice.service.WarehouseService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -27,13 +26,13 @@ public class WarehouseController {
     }
 
     @PostMapping()
-    private void create(@RequestBody WarehouseCreateDto warehouseCreateDto) {
-        warehouseService.create(warehouseCreateDto);
+    private void create(@RequestBody WarehouseAddressDto warehouseAddressDto) {
+        warehouseService.create(warehouseAddressDto);
     }
 
     @PutMapping("/{id}")
-    private void update(@PathVariable Long id, @RequestBody WarehouseCreateDto warehouseCreateDto) {
-        warehouseService.update(id, warehouseCreateDto);
+    private void update(@PathVariable Long id, @RequestBody WarehouseAddressDto warehouseAddressDto) {
+        warehouseService.update(id, warehouseAddressDto);
     }
 
     @DeleteMapping("/{id}")

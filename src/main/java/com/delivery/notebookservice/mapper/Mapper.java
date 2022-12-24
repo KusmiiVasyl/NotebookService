@@ -13,10 +13,10 @@ public interface Mapper {
     Address toAddress(AddressDto addressDto);
     void mergeAddress(AddressDto addressDto, @MappingTarget Address address);
 
-    @Mapping(source = "warehouse.address.city", target = "city")
-    @Mapping(source = "warehouse.address.street", target = "street")
-    @Mapping(source = "warehouse.address.longitude", target = "longitude")
-    @Mapping(source = "warehouse.address.latitude", target = "latitude")
+    @Mapping(source = "warehouse.address.city", target = "addressDto.city")
+    @Mapping(source = "warehouse.address.street", target = "addressDto.street")
+    @Mapping(source = "warehouse.address.longitude", target = "addressDto.longitude")
+    @Mapping(source = "warehouse.address.latitude", target = "addressDto.latitude")
     WarehouseDto toWarehouseDto(Warehouse warehouse);
     @InheritInverseConfiguration
     Warehouse toWarehouse(WarehouseDto warehouseDto);

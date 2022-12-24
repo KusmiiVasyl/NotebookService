@@ -4,7 +4,7 @@ import lombok.Data;
 
 
 @Data
-public class WarehouseCreateDto {
+public class WarehouseAddressDto {
     private String title;
     private Long addressId;
 }
