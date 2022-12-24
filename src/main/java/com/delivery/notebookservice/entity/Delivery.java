@@ -1,12 +1,12 @@
 package com.delivery.notebookservice.entity;
 
+import com.delivery.notebookservice.entity.enums.DeliveryStatus;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
-import org.hibernate.type.EnumType;
 
 
 @AllArgsConstructor
@@ -38,5 +38,6 @@ public class Delivery {
     @JoinColumn(name = "cargo_id")
     private Cargo cargo;
 
-    private StatusOfDelivery statusOfDelivery;
+    @Enumerated(EnumType.STRING)
+    private DeliveryStatus deliveryStatus;
 }

@@ -1,9 +1,6 @@
 package com.delivery.notebookservice.dto;
 
-import com.delivery.notebookservice.entity.Cargo;
-import com.delivery.notebookservice.entity.StatusOfDelivery;
-import com.delivery.notebookservice.entity.Transporter;
-import com.delivery.notebookservice.entity.Warehouse;
+import com.delivery.notebookservice.entity.enums.DeliveryStatus;
 import lombok.Data;
 
 
@@ -14,5 +11,5 @@ public class DeliveryDto {
     private WarehouseDto warehouseTo;
     private TransporterDto transporter;
     private CargoDto cargo;
-    private StatusOfDelivery statusOfDelivery;
+    private DeliveryStatus statusOfDelivery;
 }
