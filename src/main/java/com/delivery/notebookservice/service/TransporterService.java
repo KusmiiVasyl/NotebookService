@@ -31,7 +31,7 @@ public class TransporterService {
 
     public void update(Long id, TransporterDto transporterDto) {
         Transporter transporter = transporterRepository.findById(id).orElseThrow(EntityNotFoundException::new);
-        mapper.mergeTransporter(transporterDto, transporter);
+        transporter.setLoadCapacity(transporterDto.getLoadCapacity());
         transporterRepository.save(transporter);
     }
 

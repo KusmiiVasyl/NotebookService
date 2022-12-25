@@ -24,8 +24,6 @@ public class Address {
     private double longitude;
     private double latitude;
 
-    @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
-    @JsonIdentityReference(alwaysAsId = true)
     @OneToMany(mappedBy = "address")
     private List<Warehouse> warehouses;
 }

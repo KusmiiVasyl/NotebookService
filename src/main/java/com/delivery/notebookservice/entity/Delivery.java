@@ -1,6 +1,9 @@
 package com.delivery.notebookservice.entity;
 
 import com.delivery.notebookservice.entity.enums.DeliveryStatus;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -19,22 +22,22 @@ public class Delivery {
     private Long id;
 
     @ManyToOne
-    @OnDelete(action = OnDeleteAction.CASCADE)
+    @OnDelete(action = OnDeleteAction.NO_ACTION)
     @JoinColumn(name = "warehouse_from_id")
     private Warehouse warehouseFrom;
 
     @ManyToOne
-    @OnDelete(action = OnDeleteAction.CASCADE)
+    @OnDelete(action = OnDeleteAction.NO_ACTION)
     @JoinColumn(name = "warehouse_to_id")
     private Warehouse warehouseTo;
 
     @ManyToOne
-    @OnDelete(action = OnDeleteAction.CASCADE)
+    @OnDelete(action = OnDeleteAction.NO_ACTION)
     @JoinColumn(name = "transporter_id")
     private Transporter transporter;
 
     @ManyToOne
-    @OnDelete(action = OnDeleteAction.CASCADE)
+    @OnDelete(action = OnDeleteAction.NO_ACTION)
     @JoinColumn(name = "cargo_id")
     private Cargo cargo;
 
