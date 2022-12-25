@@ -6,10 +6,9 @@ import lombok.Data;
 
 @Data
 public class DeliveryDto {
-    private Long id;
-    private WarehouseDto warehouseFrom;
-    private WarehouseDto warehouseTo;
-    private TransporterDto transporter;
-    private CargoDto cargo;
-    private DeliveryStatus statusOfDelivery;
+    private Long warehouseFromId;
+    private Long warehouseToId;
+    private Long transporterId;
+    private Long cargoId;
+    private DeliveryStatus deliveryStatus;
 }

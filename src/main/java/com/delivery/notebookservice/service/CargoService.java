@@ -31,7 +31,7 @@ public class CargoService {
 
     public void update(Long id, CargoDto cargoDto) {
         Cargo cargo = cargoRepository.findById(id).orElseThrow(EntityNotFoundException::new);
-        mapper.mergeCargo(cargoDto, cargo);
+        cargo.setAmount(cargoDto.getAmount());
         cargoRepository.save(cargo);
     }
 

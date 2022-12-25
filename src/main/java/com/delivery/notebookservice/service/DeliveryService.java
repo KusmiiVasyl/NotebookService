@@ -1,10 +1,17 @@
 package com.delivery.notebookservice.service;
 
 import com.delivery.notebookservice.dto.DeliveryDto;
+import com.delivery.notebookservice.dto.DeliveryInfoDto;
+import com.delivery.notebookservice.entity.Cargo;
 import com.delivery.notebookservice.entity.Delivery;
+import com.delivery.notebookservice.entity.Transporter;
+import com.delivery.notebookservice.entity.Warehouse;
 import com.delivery.notebookservice.exception.EntityNotFoundException;
 import com.delivery.notebookservice.mapper.Mapper;
+import com.delivery.notebookservice.repository.CargoRepository;
 import com.delivery.notebookservice.repository.DeliveryRepository;
+import com.delivery.notebookservice.repository.TransporterRepository;
+import com.delivery.notebookservice.repository.WarehouseRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -14,27 +21,48 @@ import java.util.List;
 @Service
 public class DeliveryService {
     private final DeliveryRepository deliveryRepository;
+    private final WarehouseRepository warehouseRepository;
+    private final TransporterRepository transporterRepository;
+    private final CargoRepository cargoRepository;
     private final Mapper mapper;
 
-    public List<DeliveryDto> getAll() {
-        return deliveryRepository.findAll().stream().map(mapper::toDeliveryDto).toList();
+    public List<DeliveryInfoDto> getAll() {
+        return deliveryRepository.findAll().stream().map(mapper::toDeliveryInfoDto).toList();
     }
 
-    public DeliveryDto get(Long id) {
-        return deliveryRepository.findById(id).map(mapper::toDeliveryDto).orElseThrow(EntityNotFoundException::new);
+    public DeliveryInfoDto get(Long id) {
+        return deliveryRepository.findById(id).map(mapper::toDeliveryInfoDto).orElseThrow(EntityNotFoundException::new);
     }
 
     public void create(DeliveryDto deliveryDto) {
-        deliveryRepository.save(mapper.toDelivery(deliveryDto));
+        Delivery delivery = new Delivery();
+        deliveryDtoToDelivery(delivery,deliveryDto);
+        deliveryRepository.save(delivery);
     }
 
     public void update(Long id, DeliveryDto deliveryDto) {
         Delivery delivery = deliveryRepository.findById(id).orElseThrow(EntityNotFoundException::new);
-        mapper.mergeDelivery(deliveryDto, delivery);
+        deliveryDtoToDelivery(delivery,deliveryDto);
         deliveryRepository.save(delivery);
     }
 
     public void delete(Long id) {
         deliveryRepository.deleteById(id);
+    }
+
+    private void deliveryDtoToDelivery (Delivery delivery, DeliveryDto deliveryDto){
+        Warehouse warehouseFrom = warehouseRepository.findById(deliveryDto.getWarehouseFromId())
+                .orElseThrow(EntityNotFoundException::new);
+        Warehouse warehouseTo = warehouseRepository.findById(deliveryDto.getWarehouseToId())
+                .orElseThrow(EntityNotFoundException::new);
+        Transporter transporter = transporterRepository.findById(deliveryDto.getTransporterId())
+                .orElseThrow(EntityNotFoundException::new);
+        Cargo cargo = cargoRepository.findById(deliveryDto.getCargoId())
+                .orElseThrow(EntityNotFoundException::new);
+        delivery.setWarehouseFrom(warehouseFrom);
+        delivery.setWarehouseTo(warehouseTo);
+        delivery.setTransporter(transporter);
+        delivery.setCargo(cargo);
+        delivery.setDeliveryStatus(deliveryDto.getDeliveryStatus());
     }
 }

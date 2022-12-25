@@ -1,6 +1,7 @@
 package com.delivery.notebookservice.controller;
 
 import com.delivery.notebookservice.dto.DeliveryDto;
+import com.delivery.notebookservice.dto.DeliveryInfoDto;
 import com.delivery.notebookservice.entity.Delivery;
 import com.delivery.notebookservice.service.DeliveryService;
 import lombok.RequiredArgsConstructor;
@@ -16,12 +17,12 @@ public class DeliveryController {
     private final DeliveryService deliveryService;
 
     @GetMapping()
-    public List<DeliveryDto> getAll() {
+    public List<DeliveryInfoDto> getAll() {
         return deliveryService.getAll();
     }
 
     @GetMapping("/{id}")
-    public DeliveryDto get(@PathVariable Long id) {
+    public DeliveryInfoDto get(@PathVariable Long id) {
         return deliveryService.get(id);
     }
 

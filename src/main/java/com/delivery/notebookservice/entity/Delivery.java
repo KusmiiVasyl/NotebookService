@@ -1,9 +1,6 @@
 package com.delivery.notebookservice.entity;
 
 import com.delivery.notebookservice.entity.enums.DeliveryStatus;
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIdentityReference;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;

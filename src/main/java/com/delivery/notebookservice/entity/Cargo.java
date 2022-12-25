@@ -22,8 +22,6 @@ public class Cargo {
     private String name;
     private double amount;
 
-    @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
-    @JsonIdentityReference(alwaysAsId = true)
     @OneToMany(mappedBy = "cargo")
     private List<Delivery> deliveries;
 }
