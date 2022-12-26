@@ -40,7 +40,7 @@ INSERT INTO warehouse (title, address_id) VALUES
 ('Storage №10', 6);
 
 INSERT INTO delivery (warehouse_from_id, warehouse_to_id, transporter_id, cargo_id, delivery_status) VALUES
-(1, 5, 3, 8, 'REJECTED'),
+(1, 5, 3, 5, 'REJECTED'),
 (5, 6, 2, 6, 'ON_WAY'),
 (3, 1, 1, 4, 'DELIVERED'),
 (2, 4, 6, 7, 'UNLOADING'),

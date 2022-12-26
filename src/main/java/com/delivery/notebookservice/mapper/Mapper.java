@@ -32,6 +32,4 @@ public interface Mapper {
     void mergeCargo(CargoDto cargoDto, @MappingTarget Cargo cargo);
 
     DeliveryInfoDto toDeliveryInfoDto(Delivery delivery);
-    Delivery toDelivery(DeliveryInfoDto deliveryInfoDto);
-    void mergeDelivery(DeliveryInfoDto deliveryInfoDto, @MappingTarget Delivery delivery);
 }
