@@ -6,6 +6,8 @@ import com.delivery.notebookservice.exception.EntityNotFoundException;
 import com.delivery.notebookservice.mapper.Mapper;
 import com.delivery.notebookservice.repository.AddressRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,8 +20,8 @@ public class AddressService {
 
     private final Mapper mapper;
 
-    public List<AddressDto> getAll() {
-        return addressRepository.findAll().stream().map(mapper::toAddressDto).toList();
+    public Page<AddressDto> getAll(Long id, String city, String street, Pageable pageable) {
+        return addressRepository.findAllBy(id, city, street, pageable).map(mapper::toAddressDto);
     }
 
     public AddressDto get(Long id) {

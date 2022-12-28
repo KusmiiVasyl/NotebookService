@@ -4,6 +4,11 @@ import com.delivery.notebookservice.dto.AddressDto;
 import com.delivery.notebookservice.service.AddressService;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
+import org.springdoc.core.annotations.ParameterObject;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,8 +22,12 @@ public class AddressController {
 
     @Operation(summary = "Getting all addresses.", description = "Getting all addresses from database.")
     @GetMapping()
-    public List<AddressDto> getAll() {
-        return addressService.getAll();
+    public Page<AddressDto> getAll(@RequestParam(required = false) Long id,
+                                   @RequestParam(required = false) String city,
+                                   @RequestParam(required = false) String street,
+                                   @PageableDefault(sort = "id", direction = Sort.Direction.ASC, size = 5)
+                                   @ParameterObject Pageable pageable) {
+        return addressService.getAll(id, city, street, pageable);
     }
 
     @Operation(summary = "Get address by id.", description = "Get address by id from database.")
