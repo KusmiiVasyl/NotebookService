@@ -4,9 +4,12 @@ import com.delivery.notebookservice.dto.CargoDto;
 import com.delivery.notebookservice.service.CargoService;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
+import org.springdoc.core.annotations.ParameterObject;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 
 @RequiredArgsConstructor
@@ -17,8 +20,13 @@ public class CargoController {
 
     @Operation(summary = "Getting all cargo.", description = "Getting all cargo from database.")
     @GetMapping()
-    public List<CargoDto> getAll() {
-        return cargoService.getAll();
+    public Page<CargoDto> getAll(@RequestParam(required = false) Long id,
+                                 @RequestParam(required = false) String name,
+                                 @RequestParam(required = false) Double amountRangeStart,
+                                 @RequestParam(required = false) Double amountRangeEnd,
+                                 @PageableDefault(sort = "id", direction = Sort.Direction.ASC, size = 5)
+                                 @ParameterObject Pageable pageable) {
+        return cargoService.getAll(id, name, amountRangeStart, amountRangeEnd, pageable);
     }
 
     @Operation(summary = "Get cargo by id.", description = "Get cargo by id from database.")
