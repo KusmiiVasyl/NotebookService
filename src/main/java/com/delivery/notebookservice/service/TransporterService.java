@@ -6,9 +6,9 @@ import com.delivery.notebookservice.exception.EntityNotFoundException;
 import com.delivery.notebookservice.mapper.Mapper;
 import com.delivery.notebookservice.repository.TransporterRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 
 @RequiredArgsConstructor
@@ -17,8 +17,8 @@ public class TransporterService {
     private final TransporterRepository transporterRepository;
     private final Mapper mapper;
 
-    public List<TransporterDto> getAll() {
-        return transporterRepository.findAll().stream().map(mapper::toTransporterDto).toList();
+    public Page<TransporterDto> getAll(Long id, String name, String carModel, Double loadCapacity, Pageable pageable) {
+        return transporterRepository.findAllBy(id, name, carModel, loadCapacity, pageable).map(mapper::toTransporterDto);
     }
 
     public TransporterDto get(Long id) {

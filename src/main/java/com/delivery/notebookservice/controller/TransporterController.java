@@ -4,9 +4,12 @@ import com.delivery.notebookservice.dto.TransporterDto;
 import com.delivery.notebookservice.service.TransporterService;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
+import org.springdoc.core.annotations.ParameterObject;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 
 @RequiredArgsConstructor
@@ -17,8 +20,13 @@ public class TransporterController {
 
     @Operation(summary = "Getting all transporters.", description = "Getting all transporters from database.")
     @GetMapping()
-    public List<TransporterDto> getAll() {
-        return transporterService.getAll();
+    public Page<TransporterDto> getAll(@RequestParam(required = false) Long id,
+                                       @RequestParam(required = false) String name,
+                                       @RequestParam(required = false) String carModel,
+                                       @RequestParam(required = false) Double loadCapacity,
+                                       @PageableDefault(sort = "id", direction = Sort.Direction.ASC, size = 5)
+                                       @ParameterObject Pageable pageable) {
+        return transporterService.getAll(id, name, carModel, loadCapacity, pageable);
     }
 
     @Operation(summary = "Get transporter by id.", description = "Get transporter by id from database.")

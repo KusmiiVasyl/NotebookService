@@ -5,9 +5,12 @@ import com.delivery.notebookservice.dto.WarehouseDto;
 import com.delivery.notebookservice.service.WarehouseService;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
+import org.springdoc.core.annotations.ParameterObject;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 
 @RequiredArgsConstructor
@@ -18,8 +21,14 @@ public class WarehouseController {
 
     @Operation(summary = "Getting all warehouses.", description = "Getting all warehouses from database.")
     @GetMapping()
-    public List<WarehouseDto> getAll() {
-        return warehouseService.getAll();
+    public Page<WarehouseDto> getAll(@RequestParam(required = false) Long id,
+                                     @RequestParam(required = false) String title,
+                                     @RequestParam(required = false) Long addressId,
+                                     @RequestParam(required = false) String city,
+                                     @RequestParam(required = false) String street,
+                                     @PageableDefault(sort = "id", direction = Sort.Direction.ASC, size = 5)
+                                     @ParameterObject Pageable pageable) {
+        return warehouseService.getAll(id, title, addressId, city, street, pageable);
     }
 
     @Operation(summary = "Get warehouse by id.", description = "Get warehouse by id from database.")

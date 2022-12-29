@@ -9,9 +9,9 @@ import com.delivery.notebookservice.mapper.Mapper;
 import com.delivery.notebookservice.repository.AddressRepository;
 import com.delivery.notebookservice.repository.WarehouseRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 
 @RequiredArgsConstructor
@@ -21,8 +21,8 @@ public class WarehouseService {
     private final AddressRepository addressRepository;
     private final Mapper mapper;
 
-    public List<WarehouseDto> getAll() {
-        return warehouseRepository.findAll().stream().map(mapper::toWarehouseDto).toList();
+    public Page<WarehouseDto> getAll(Long id, String title, Long addressId, String city, String street, Pageable pageable) {
+        return warehouseRepository.findAllBy(id, title, addressId, city, street, pageable).map(mapper::toWarehouseDto);
     }
 
     public WarehouseDto get(Long id) {

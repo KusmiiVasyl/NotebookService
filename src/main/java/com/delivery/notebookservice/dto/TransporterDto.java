@@ -1,9 +1,6 @@
 package com.delivery.notebookservice.dto;
 
-import com.delivery.notebookservice.entity.Delivery;
 import lombok.Data;
-
-import java.util.List;
 
 
 @Data
