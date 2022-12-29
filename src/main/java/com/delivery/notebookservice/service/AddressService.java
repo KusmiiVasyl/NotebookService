@@ -1,7 +1,6 @@
 package com.delivery.notebookservice.service;
 
 import com.delivery.notebookservice.dto.AddressDto;
-import com.delivery.notebookservice.entity.Address;
 import com.delivery.notebookservice.exception.EntityNotFoundException;
 import com.delivery.notebookservice.mapper.Mapper;
 import com.delivery.notebookservice.repository.AddressRepository;
@@ -9,8 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
+import org.springframework.transaction.annotation.Transactional;
 
 
 @RequiredArgsConstructor
@@ -32,10 +30,9 @@ public class AddressService {
         addressRepository.save(mapper.toAddress(addressDto));
     }
 
-    public void update(Long id, AddressDto addressDto) {
-        Address address = addressRepository.findById(id).orElseThrow(EntityNotFoundException::new);
-        mapper.mergeAddress(addressDto, address);
-        addressRepository.save(address);
+    @Transactional
+    public void update(Long id, String city, String street, Double longitude, Double latitude) {
+        addressRepository.updateAddressById(id, city, street, longitude, latitude);
     }
 
     public void delete(Long id) {

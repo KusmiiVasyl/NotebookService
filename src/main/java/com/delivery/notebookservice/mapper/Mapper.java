@@ -11,7 +11,6 @@ import org.mapstruct.MappingTarget;
 public interface Mapper {
     AddressDto toAddressDto(Address address);
     Address toAddress(AddressDto addressDto);
-    void mergeAddress(AddressDto addressDto, @MappingTarget Address address);
 
     @Mapping(source = "warehouse.address.city", target = "addressDto.city")
     @Mapping(source = "warehouse.address.street", target = "addressDto.street")

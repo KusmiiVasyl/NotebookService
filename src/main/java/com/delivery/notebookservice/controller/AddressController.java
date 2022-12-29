@@ -11,8 +11,6 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 
 @RequiredArgsConstructor
 @RestController
@@ -44,8 +42,12 @@ public class AddressController {
 
     @Operation(summary = "Change address by id.", description = "Change address by id in the database.")
     @PutMapping("/{id}")
-    private void update(@PathVariable Long id, @RequestBody AddressDto addressDto) {
-        addressService.update(id, addressDto);
+    private void update(@RequestParam(required = false) Long id,
+                        @RequestParam(required = false) String city,
+                        @RequestParam(required = false) String street,
+                        @RequestParam(required = false) Double longitude,
+                        @RequestParam(required = false) Double latitude) {
+        addressService.update(id, city, street, longitude, latitude);
     }
 
     @Operation(summary = "Delete address by id.",
