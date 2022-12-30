@@ -1,5 +1,6 @@
 package com.delivery.notebookservice.entity.enums;
 
+
 public enum DeliveryStatus {
     ACCEPTED,
     REJECTED,

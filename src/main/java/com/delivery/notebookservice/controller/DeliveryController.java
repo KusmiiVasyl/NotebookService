@@ -2,12 +2,16 @@ package com.delivery.notebookservice.controller;
 
 import com.delivery.notebookservice.dto.DeliveryDto;
 import com.delivery.notebookservice.dto.DeliveryInfoDto;
+import com.delivery.notebookservice.entity.enums.DeliveryStatus;
 import com.delivery.notebookservice.service.DeliveryService;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
+import org.springdoc.core.annotations.ParameterObject;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 
 @RequiredArgsConstructor
@@ -18,8 +22,29 @@ public class DeliveryController {
 
     @Operation(summary = "Getting all deliveries.", description = "Getting all deliveries from database.")
     @GetMapping()
-    public List<DeliveryInfoDto> getAll() {
-        return deliveryService.getAll();
+    public Page<DeliveryInfoDto> getAll(@RequestParam(required = false) Long id,
+                                        @RequestParam(required = false) Long warehouseFromId,
+                                        @RequestParam(required = false) String warehouseFromTitle,
+                                        @RequestParam(required = false) String deliveryFromCity,
+                                        @RequestParam(required = false) Long warehouseToId,
+                                        @RequestParam(required = false) String warehouseToTitle,
+                                        @RequestParam(required = false) String deliveryToCity,
+                                        @RequestParam(required = false) Long transporterId,
+                                        @RequestParam(required = false) Long cargoId,
+                                        @RequestParam(required = false) DeliveryStatus deliveryStatus,
+                                        @PageableDefault(sort = "id", direction = Sort.Direction.ASC, size = 5)
+                                        @ParameterObject Pageable pageable) {
+        return deliveryService.getAll(id,
+                warehouseFromId,
+                warehouseFromTitle,
+                deliveryFromCity,
+                warehouseToId,
+                warehouseToTitle,
+                deliveryToCity,
+                transporterId,
+                cargoId,
+                deliveryStatus,
+                pageable);
     }
 
     @Operation(summary = "Get delivery by id.", description = "Get delivery by id from database.")
