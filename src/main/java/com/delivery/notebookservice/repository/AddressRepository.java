@@ -11,24 +11,20 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface AddressRepository extends JpaRepository<Address, Long> {
-    @Query("SELECT a FROM Address a WHERE " +
-            ":id = a.id " +
-            "OR " +
-            "lower(a.city) LIKE concat(lower(:city), '%') " +
-            "OR " +
-            "lower(a.street) LIKE concat(lower(:street), '%') " +
-            "OR " +
-            ":id IS null AND " +
-            ":city IS null AND " +
-            ":street IS null")
+    @Query("""
+            SELECT a FROM Address a WHERE 
+            (:id = a.id OR :id IS null) AND 
+            (lower(a.city) LIKE concat(lower(:city), '%') OR :city IS null) AND
+            (lower(a.street) LIKE concat(lower(:street), '%') OR :street IS null)""")
     Page<Address> findAllBy(Long id, String city, String street, Pageable pageable);
 
     @Modifying
-    @Query("UPDATE Address  a SET " +
-            "a.city = :city, " +
-            "a.street = :street, " +
-            "a.longitude = :longitude, " +
-            "a.latitude = :latitude " +
-            "WHERE a.id = :id")
+    @Query("""
+            UPDATE Address a SET 
+            a.city = :city, 
+            a.street = :street, 
+            a.longitude = :longitude, 
+            a.latitude = :latitude 
+            WHERE a.id = :id""")
     void updateAddressById(Long id, String city, String street, Double longitude, Double latitude);
 }

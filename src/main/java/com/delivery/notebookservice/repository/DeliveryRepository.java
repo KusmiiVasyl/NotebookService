@@ -11,37 +11,18 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface DeliveryRepository extends JpaRepository<Delivery, Long> {
-    @Query(value = "SELECT d FROM Delivery d WHERE " +
-            ":id = d.id " +
-            "OR " +
-            ":warehouseFromId = d.warehouseFrom.id " +
-            "OR " +
-            "lower(d.warehouseFrom.title) LIKE concat('%', lower(:warehouseFromTitle), '%') " +
-            "OR " +
-            "lower(d.warehouseFrom.address.city) LIKE concat(lower(:deliveryFromCity), '%') " +
-            "OR " +
-            ":warehouseToId = d.warehouseTo.id " +
-            "OR " +
-            "lower(d.warehouseTo.title) LIKE concat('%', lower(:warehouseToTitle), '%') " +
-            "OR " +
-            "lower(d.warehouseTo.address.city) LIKE concat(lower(:deliveryToCity), '%') " +
-            "OR " +
-            ":transporterId = d.transporter.id " +
-            "OR " +
-            ":cargoId = d.cargo.id " +
-            "OR " +
-            ":deliveryStatus = d.deliveryStatus " +
-            "OR " +
-            ":id IS null AND " +
-            ":warehouseFromId IS null AND " +
-            ":warehouseFromTitle IS null AND " +
-            ":deliveryFromCity IS null AND " +
-            ":warehouseToId IS null AND " +
-            ":warehouseToTitle IS null AND " +
-            ":deliveryToCity IS null AND " +
-            ":transporterId IS null AND " +
-            ":cargoId IS null AND " +
-            ":deliveryStatus IS null")
+    @Query(value = """
+             SELECT d FROM Delivery d WHERE
+            (:id = d.id OR :id IS null) AND
+            (:warehouseFromId = d.warehouseFrom.id OR :warehouseFromId IS null) AND
+            (lower(d.warehouseFrom.title) LIKE concat('%', lower(:warehouseFromTitle),'%') OR :warehouseFromTitle IS null) AND
+            (lower(d.warehouseFrom.address.city) LIKE concat(lower(:deliveryFromCity), '%') OR :deliveryFromCity IS null) AND
+            (:warehouseToId = d.warehouseTo.id OR :warehouseToId IS null) AND
+            (lower(d.warehouseTo.title) LIKE concat('%', lower(:warehouseToTitle), '%') OR :warehouseToTitle IS null) AND
+            (lower(d.warehouseTo.address.city) LIKE concat(lower(:deliveryToCity), '%') OR :deliveryToCity IS null) AND
+            (:transporterId = d.transporter.id OR :transporterId IS null) AND
+            (lower(d.cargo.name) LIKE concat('%', lower(:cargoName),'%') OR :cargoName IS null) AND
+            (:deliveryStatus = d.deliveryStatus OR :deliveryStatus IS null)""")
     Page<Delivery> findAllBy(Long id,
                              Long warehouseFromId,
                              String warehouseFromTitle,
@@ -50,7 +31,9 @@ public interface DeliveryRepository extends JpaRepository<Delivery, Long> {
                              String warehouseToTitle,
                              String deliveryToCity,
                              Long transporterId,
-                             Long cargoId,
+                             String cargoName,
                              DeliveryStatus deliveryStatus,
                              Pageable pageable);
 }
+
+

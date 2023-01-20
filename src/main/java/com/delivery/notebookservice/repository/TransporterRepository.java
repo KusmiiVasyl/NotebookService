@@ -10,18 +10,11 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface TransporterRepository extends JpaRepository<Transporter, Long> {
-    @Query(value = "SELECT t FROM Transporter t WHERE " +
-            ":id = t.id " +
-            "OR " +
-            "lower(t.name) LIKE concat('%', lower(:name), '%') " +
-            "OR " +
-            "lower(t.carModel) LIKE concat('%', lower(:carModel), '%') " +
-            "OR " +
-            ":loadCapacity <= t.loadCapacity " +
-            "OR " +
-            ":id IS null AND " +
-            ":name IS null AND " +
-            ":carModel IS null AND " +
-            ":loadCapacity IS null")
+    @Query(value = """
+            SELECT t FROM Transporter t WHERE 
+            (:id = t.id OR :id IS null) AND
+            (lower(t.name) LIKE concat('%', lower(:name), '%') OR :name IS null) AND 
+            (lower(t.carModel) LIKE concat('%', lower(:carModel), '%') OR :carModel IS null) AND
+            (:loadCapacity <= t.loadCapacity OR :loadCapacity IS null)""")
     Page<Transporter> findAllBy(Long id, String name, String carModel, Double loadCapacity, Pageable pageable);
 }

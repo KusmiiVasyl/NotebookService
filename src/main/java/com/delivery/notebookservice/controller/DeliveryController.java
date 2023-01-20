@@ -30,7 +30,7 @@ public class DeliveryController {
                                         @RequestParam(required = false) String warehouseToTitle,
                                         @RequestParam(required = false) String deliveryToCity,
                                         @RequestParam(required = false) Long transporterId,
-                                        @RequestParam(required = false) Long cargoId,
+                                        @RequestParam(required = false) String cargoName,
                                         @RequestParam(required = false) DeliveryStatus deliveryStatus,
                                         @PageableDefault(sort = "id", direction = Sort.Direction.ASC, size = 5)
                                         @ParameterObject Pageable pageable) {
@@ -42,7 +42,7 @@ public class DeliveryController {
                 warehouseToTitle,
                 deliveryToCity,
                 transporterId,
-                cargoId,
+                cargoName,
                 deliveryStatus,
                 pageable);
     }

@@ -36,7 +36,7 @@ public class DeliveryService {
                                         String warehouseToTitle,
                                         String deliveryToCity,
                                         Long transporterId,
-                                        Long cargoId,
+                                        String cargoName,
                                         DeliveryStatus deliveryStatus,
                                         Pageable pageable) {
         return deliveryRepository.findAllBy(id,
@@ -47,7 +47,7 @@ public class DeliveryService {
                 warehouseToTitle,
                 deliveryToCity,
                 transporterId,
-                cargoId,
+                cargoName,
                 deliveryStatus,
                 pageable).map(mapper::toDeliveryInfoDto);
     }

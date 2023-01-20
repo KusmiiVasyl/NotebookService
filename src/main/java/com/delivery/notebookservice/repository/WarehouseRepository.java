@@ -10,21 +10,12 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface WarehouseRepository extends JpaRepository<Warehouse, Long> {
-    @Query("SELECT w FROM Warehouse w WHERE " +
-            ":id = w.id " +
-            "OR " +
-            "lower(w.title) LIKE concat('%', lower(:title), '%') " +
-            "OR " +
-            ":addressId = w.address.id " +
-            "OR " +
-            "lower(w.address.city) LIKE concat(lower(:city), '%') " +
-            "OR " +
-            "lower(w.address.street) LIKE concat(lower(:street), '%') " +
-            "OR " +
-            ":id IS null AND " +
-            ":title IS null AND " +
-            ":addressId IS null AND " +
-            ":city IS null AND " +
-            ":street IS null")
+    @Query("""
+            SELECT w FROM Warehouse w WHERE 
+            (:id = w.id OR :id IS null) AND
+            (lower(w.title) LIKE concat('%', lower(:title), '%') OR :title IS null) AND
+            (:addressId = w.address.id OR :addressId IS null) AND
+            (lower(w.address.city) LIKE concat(lower(:city), '%') OR :city IS null) AND 
+            (lower(w.address.street) LIKE concat(lower(:street), '%') OR :street IS null)""")
     Page<Warehouse> findAllBy(Long id, String title, Long addressId, String city, String street, Pageable pageable);
 }
