@@ -29,3 +29,6 @@
 
 
 ![Page2](https://user-images.githubusercontent.com/90526809/232237219-c7156f30-0fa1-4201-bf20-241a490203a7.png)
+
+Схема
+<img width="825" alt="Page3" src="https://user-images.githubusercontent.com/90526809/232237461-c696b295-192e-4b61-aad3-34ecafb042c6.PNG">
